@@ -14,6 +14,7 @@ vim.opt.shiftwidth = 4
 
 -- Enable mouse support
 vim.opt.mouse = 'a'
+vim.o.mousemoveevent = true
 
 -- Enable syntax highlighting
 vim.cmd('syntax on')
@@ -46,15 +47,21 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
+-- Let the cursor go one past the end of the line in normal mode
+vim.opt.virtualedit=onemore
+
 --
 -- Plugin Manager
 --
 
 require("config.lazy")
+require('lsp_signature').on_attach()
 
 --
 -- Customizations 
 --
+
+--vim.cmd.normal("c
 
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
@@ -82,6 +89,12 @@ map('n', '<BS>', 'i<BS><Esc><Right>', opts)
 
 
 
-require('lsp_signature').on_attach()
-vim.o.mousemoveevent = true
+-- Move Around tabs with alt
+
+for i = 1, 9 do
+    map("n", "<A-" .. tostring(i) .. ">", tostring(i) .. "gt", opts)
+end
+
+map("n", "<A-Left>", "gT", opts)
+map("n", "<A-Right>", "gt", opts)
 

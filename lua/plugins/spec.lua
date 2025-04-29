@@ -1,5 +1,19 @@
-return { 
-   
+return {
+  {
+    "tomasiser/vim-code-dark",
+    lazy = false,          -- load during startup
+    priority = 1000,       -- ensure it loads before other plugins
+    config = function()
+      -- Optional: conservative mode
+      -- vim.g.codedark_conservative = 1
+
+      -- Optional: force 256 color support in terminal
+      -- vim.g.codedark_term256 = 1
+
+      vim.cmd("colorscheme codedark")
+    end,
+  },
+
   -- TODO: Comments
   { "folke/todo-comments.nvim", opts = {} },
 
@@ -21,6 +35,7 @@ return {
           "pyright",    -- python
           "rust_analyzer",  -- rust
           "clangd",     -- c/c++
+          "fortls"
         },
         automatic_installation = true,
       })
@@ -31,7 +46,7 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
       local lspconfig = require("lspconfig")
-  
+
       -- Example: only attach `lua_ls` to Lua files
       lspconfig.lua_ls.setup({
         settings = {
@@ -40,10 +55,12 @@ return {
           },
         },
       })
-  
+
       -- Example: only attach `pyright` to Python files
-      lspconfig.pyright.setup({})
-  
+      lspconfig.pyright.setup({
+            settings = {["python.analysis.typeCheckingMode"] = "basic", },
+      })
+
       -- You can even lazy-load servers manually if needed,
       -- but lspconfig will do it automatically when you open the right file.
     end,
