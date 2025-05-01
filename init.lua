@@ -48,7 +48,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 
 -- Let the cursor go one past the end of the line in normal mode
-vim.opt.virtualedit=onemore
+vim.o.virtualedit="onemore"
 
 --
 -- Plugin Manager
@@ -84,15 +84,13 @@ map('v', '<A-Up>', ":move '<-2<CR>gv", opts)  -- Move selected lines up and rese
 map('v', '<A-Down>', ":move '>+1<CR>gv", opts)  -- Move selected lines down and reselect them
 
 -- Enter and Delete Being Nice in Normal mode
-map('n', '<Enter>', 'a<Enter><Esc>', opts)
-map('n', '<BS>', 'i<BS><Esc><Right>', opts)
+map('n', '<Enter>', 'i<Enter><Esc>', opts)
+map('n', '<BS>', 'a<Left><BS><Esc>', opts)
 
-
-
--- Move Around tabs with alt
-
+-- Move Around tabs with alt/ctrl
 for i = 1, 9 do
     map("n", "<A-" .. tostring(i) .. ">", tostring(i) .. "gt", opts)
+    map("n", "<C-" .. tostring(i) .. ">", tostring(i) .. "gt", opts)
 end
 
 map("n", "<A-Left>", "gT", opts)
