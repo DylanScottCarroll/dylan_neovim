@@ -46,6 +46,8 @@ vim.api.nvim_create_autocmd("FileType", {
   end
 })
 
+-- Remove netrw banner
+vim.g.netrw_banner = 0
 
 -- Let the cursor go one past the end of the line in normal mode
 vim.o.virtualedit="onemore"
