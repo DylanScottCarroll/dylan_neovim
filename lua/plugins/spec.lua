@@ -14,19 +14,20 @@ return {
     end,
   },
 
-  -- TODO: Comments
   { "folke/todo-comments.nvim", opts = {} },
 
 
   {
     "williamboman/mason.nvim",
-    build = ":masonupdate", -- optional: update mason registry on install
+    version = "^1.0.0",
+    build = ":MasonUpdate", -- optional: update mason registry on install
     config = function()
       require("mason").setup()
     end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    version = "^1.0.0",
     dependencies = { "williamboman/mason.nvim" },
     config = function()
       require("mason-lspconfig").setup({
@@ -35,7 +36,7 @@ return {
           "pyright",    -- python
           "rust_analyzer",  -- rust
           "clangd",     -- c/c++
-          "fortls"
+          "fortls",
         },
         automatic_installation = true,
       })
@@ -44,10 +45,12 @@ return {
 
   {
     "neovim/nvim-lspconfig",
+    versionn = "^1.0.0",
     config = function()
       local lspconfig = require("lspconfig")
 
-      -- Example: only attach `lua_ls` to Lua files
+      -- Example: only attach `lua
+      -- _ls` to Lua files
       lspconfig.lua_ls.setup({
         settings = {
           Lua = {
@@ -84,7 +87,7 @@ return {
         hint_prefix = "->"
     },
   },
-
+ 
   {
     "soulis-1256/eagle.nvim",
     opts = {
